@@ -41,7 +41,8 @@ export default function AISTrackingMap() {
     setPositions([]);
     setSelectedShip(null);
 
-    const ws = new WebSocket('ws://localhost:8000/api/ais/stream');
+    const wsUrl = `${process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000'}/api/ais/stream`;
+    const ws = new WebSocket(wsUrl);
     wsRef.current = ws;
 
     ws.onopen = () => {
@@ -263,7 +264,7 @@ export default function AISTrackingMap() {
 
         {/* Map */}
         <div className="lg:col-span-2">
-          <div className="border rounded-lg overflow-hidden shadow-lg" style={{ height: '700px' }}>
+          <div className="border rounded-lg overflow-hidden shadow-lg relative" style={{ height: '700px', zIndex: 0 }}>
             <MapComponent
               center={center}
               zoom={zoom}

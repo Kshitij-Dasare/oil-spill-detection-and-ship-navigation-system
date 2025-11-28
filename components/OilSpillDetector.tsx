@@ -13,7 +13,7 @@ export function OilSpillDetectionPanel() {
   const [result, setResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
-  const API_URL = "http://localhost:8000/api/predict"; // your FastAPI endpoint
+  const API_URL = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/predict`;
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;

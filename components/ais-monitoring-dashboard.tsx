@@ -313,8 +313,8 @@ export function AISMonitoringDashboard() {
         <Tabs defaultValue="vessels" className="space-y-6">
           <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="vessels">Vessel Tracking</TabsTrigger>
-            <TabsTrigger value="anomalies">Anomaly Detection</TabsTrigger>
             <TabsTrigger value="oil-spill">Oil Spill Detection</TabsTrigger>
+            <TabsTrigger value="anomalies">Anomaly Detection</TabsTrigger>
             <TabsTrigger value="alerts">Alert System</TabsTrigger>
             <TabsTrigger value="satellite">Satellite View</TabsTrigger>
             <TabsTrigger value="mapping">Geographic Map</TabsTrigger>
@@ -439,12 +439,12 @@ export function AISMonitoringDashboard() {
 
           </TabsContent>
 
-          <TabsContent value="anomalies" className="space-y-6">
-            <AnomalyDetectionPanel />
-          </TabsContent>
-
           <TabsContent value="oil-spill" className="space-y-6">
             <OilSpillDetectionPanel />
+          </TabsContent>
+
+          <TabsContent value="anomalies" className="space-y-6">
+            <AnomalyDetectionPanel />
           </TabsContent>
 
           <TabsContent value="alerts" className="space-y-6">
