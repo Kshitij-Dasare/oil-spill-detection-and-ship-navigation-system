@@ -10,8 +10,10 @@ import { Ship, AlertTriangle, Satellite, MapPin, Activity, Navigation, Shield, E
 import { AnomalyDetectionPanel } from "@/components/anomaly-detection-panel"
 import { SatelliteImageryViewer } from "@/components/satellite-imagery-viewer"
 import { OilSpillAlertSystem } from "@/components/oil-spill-alert-system"
+import { OilSpillDetectionPanel } from "@/components/OilSpillDetector"
 import { GeographicMappingInterface } from "@/components/geographic-mapping-interface"
 import { RegulatoryAuthorityPortal } from "@/components/regulatory-authority-portal"
+import AISTracking from "./AISTracking"
 
 interface VesselData {
   id: string
@@ -309,9 +311,10 @@ export function AISMonitoringDashboard() {
 
         {/* Main Dashboard */}
         <Tabs defaultValue="vessels" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="vessels">Vessel Tracking</TabsTrigger>
             <TabsTrigger value="anomalies">Anomaly Detection</TabsTrigger>
+            <TabsTrigger value="oil-spill">Oil Spill Detection</TabsTrigger>
             <TabsTrigger value="alerts">Alert System</TabsTrigger>
             <TabsTrigger value="satellite">Satellite View</TabsTrigger>
             <TabsTrigger value="mapping">Geographic Map</TabsTrigger>
@@ -432,10 +435,16 @@ export function AISMonitoringDashboard() {
                 </CardContent>
               </Card>
             </div>
+            <AISTracking vessels={vessels} selectedVessel={selectedVessel} onVesselSelect={setSelectedVessel} />
+
           </TabsContent>
 
           <TabsContent value="anomalies" className="space-y-6">
             <AnomalyDetectionPanel />
+          </TabsContent>
+
+          <TabsContent value="oil-spill" className="space-y-6">
+            <OilSpillDetectionPanel />
           </TabsContent>
 
           <TabsContent value="alerts" className="space-y-6">
@@ -484,8 +493,11 @@ export function AISMonitoringDashboard() {
                 </CardContent>
               </Card>
             </div>
+            
           </TabsContent>
+           
         </Tabs>
+       
       </div>
     </div>
   )
