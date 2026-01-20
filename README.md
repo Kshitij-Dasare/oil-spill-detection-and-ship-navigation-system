@@ -1,164 +1,73 @@
-# Oil Spill Detection Frontend - Next.js
+# Oil Spill Detection Backend - FastAPI
 
-Next.js dashboard for monitoring oil spills and tracking vessels in real-time.
+FastAPI backend server for oil spill detection using AI.
 
 ## Quick Start
 
-### 1. Install Node.js
-Download Node.js 18+ from [nodejs.org](https://nodejs.org/)
+### 1. Install Python
+Download Python 3.8+ from [python.org](https://www.python.org/downloads/)
 
-### 2. Open PowerShell & Navigate to Project
-
-```powershell
-cd C:\Users\akash\work\oil_spill\Project_zip_KD_oil_spill
-```
-
-### 3. Install Dependencies
+### 2. Open PowerShell & Navigate to Backend
 
 ```powershell
-npm install
+cd C:\Users\akash\work\oil_spill\Backend
 ```
 
-Or with pnpm:
-```powershell
-pnpm install
-```
-
-### 4. Start Development Server
+### 3. Create & Activate Virtual Environment
 
 ```powershell
-npm run dev
+python -m venv venv
+.\venv\Scripts\Activate.ps1
 ```
 
-✅ App running at: `http://localhost:3000`
+### 4. Install Dependencies
 
----
-
-## Available Commands
-
-| Command | Purpose |
-|---------|---------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm start` | Run production build |
-| `npm run lint` | Check code quality |
-
----
-
-## Features
-
-- 🚢 **Vessel Tracking** - Real-time AIS ship monitoring with Leaflet maps
-- 🛢️ **Oil Spill Detection** - AI-powered satellite image analysis
-- 🔔 **Alert System** - Emergency notifications for incidents
-- 📡 **Anomaly Detection** - Vessel behavior analysis
-- 🗺️ **Geographic Mapping** - Interactive map interface
-- 🛰️ **Satellite Viewer** - Satellite imagery display
-- 📊 **Regulatory Portal** - Authority access controls
-
----
-
-## Project Structure
-
-```
-Project_zip_KD_oil_spill/
-├── app/
-│   ├── page.tsx          # Main dashboard
-│   ├── layout.tsx        # App layout
-│   └── globals.css       # Global styles
-├── components/
-│   ├── ais-monitoring-dashboard.tsx
-│   ├── AISTracking.tsx
-│   ├── MapView.tsx
-│   ├── OilSpillDetector.tsx
-│   ├── anomaly-detection-panel.tsx
-│   └── ui/               # UI components
-├── package.json
-└── README.md
+```powershell
+pip install -r requirements.txt
 ```
 
----
+### 5. Start Server
 
-## Configuration
-
-### Backend Connection
-
-Edit `.env.local` to update the backend URL:
-
-```env
-# .env.local
-NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_WS_URL=ws://localhost:8000
+```powershell
+uvicorn main:app --reload
 ```
 
-Change these URLs if your backend is running on a different host/port.
-
-### Default Values
-
-If `.env.local` is not set, the app will use:
-- REST API: `http://localhost:8000`
-- WebSocket: `ws://localhost:8000`
+✅ Server running at: `http://localhost:8000`
 
 ---
 
-## Main Pages/Tabs
+## Access API
 
-| Tab | Function |
-|-----|----------|
-| **Vessel Tracking** | Monitor active ships via AIS |
-| **Anomaly Detection** | Detect unusual vessel behavior |
-| **Oil Spill Detection** | Upload & analyze satellite images |
-| **Alert System** | Manage emergency alerts |
-| **Satellite View** | View satellite imagery |
-| **Geographic Map** | Interactive mapping |
-| **Reports** | System reports & authority portal |
+- **Swagger Docs**: `http://localhost:8000/docs`
+- **ReDoc**: `http://localhost:8000/redoc`
+
+---
+
+## Main Endpoints
+
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| POST | `/api/predict` | Upload image to detect oil spills |
+| POST | `/api/send-alert` | Send email alert |
+| WS | `/api/ais/stream` | Real-time vessel tracking |
 
 ---
 
 ## Common Issues
 
-**Dependencies not installed?**
+**Module not found error?**
 ```powershell
-npm install
+pip install -r requirements.txt
 ```
 
-**Port 3000 in use?**
+**Port 8000 in use?**
 ```powershell
-npm run dev -- -p 3001
+uvicorn main:app --port 8001 --reload
 ```
 
-**Backend not connecting?**
-- Ensure backend is running at `http://localhost:8000`
-- Check CORS settings in backend
-
-**Map not displaying?**
-- Verify Leaflet is installed: `npm list leaflet`
-- Check browser console for errors
+**Model file missing?**
+Make sure `Models/oilspill_unet.h5` exists in the Backend folder.
 
 ---
 
-## Tech Stack
-
-- **Next.js 14.2** - React framework
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Leaflet** - Map library
-- **Radix UI** - Component library
-- **Recharts** - Data visualization
-
----
-
-## Build for Production
-
-```powershell
-npm run build
-npm start
-```
-
-Visit `http://localhost:3000`
-
----
-
-**Make sure backend is running before using the app!**
-
-See Backend README for setup instructions.
+**Documentation**: See main.py for API details
